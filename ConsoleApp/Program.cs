@@ -14,7 +14,7 @@ namespace ConsoleApp
             labyrinth.addRoom(new Room(0, 10, 8, 3));
             labyrinth.addRoom(new Room(-10, -5, 8, 4));
             RenderLVisitor visitor = new BlankRenderLVisitor();
-            LabyrinthDrawer drawer = new CharacterLDrawer(visitor);
+            LabyrinthDrawer drawer = new BitmapLDrawer(visitor);
             drawer.Draw(labyrinth);
         }
     }
