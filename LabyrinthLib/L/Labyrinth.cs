@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +10,10 @@ namespace LabyrinthLib.L
 {
     public struct Size
     {
-        public int width;
-        public int height;
+        public float width;
+        public float height;
 
-        public Size(int width, int height)
+        public Size(float width, float height)
         {
             this.width = width;
             this.height = height;
@@ -23,18 +24,18 @@ namespace LabyrinthLib.L
     {
         private readonly List<Room> _rooms = new();
         private readonly List<Door> _doors = new();
-        private Point _topLeft = new Point(0, 0);
-        private Point _bottomRight = new Point(0, 0);
+        private Vector2 _topLeft = new Vector2(0, 0);
+        private Vector2 _bottomRight = new Vector2(0, 0);
 
         public int addRoom(Room room)
         {
             var len = _rooms.Count;
             _rooms.Add(room);
-            _topLeft.x = Math.Min(room.X, _topLeft.x);
-            _topLeft.y = Math.Min(room.Y, _topLeft.y);
-            Point bottomRight = room.bottomRight();
-            _bottomRight.x = Math.Max(bottomRight.x, _bottomRight.x);
-            _bottomRight.y = Math.Max(bottomRight.y, _bottomRight.y);
+            _topLeft.X = Math.Min(room.X, _topLeft.X);
+            _topLeft.Y = Math.Min(room.Y, _topLeft.Y);
+            Vector2 bottomRight = room.bottomRight();
+            _bottomRight.X = Math.Max(bottomRight.X, _bottomRight.X);
+            _bottomRight.Y = Math.Max(bottomRight.Y, _bottomRight.Y);
             return len;
         }
 
@@ -47,10 +48,10 @@ namespace LabyrinthLib.L
 
         public Size GetSize()
         {
-            return new Size(_bottomRight.x - _topLeft.x, _bottomRight.y - _topLeft.y);
+            return new Size(_bottomRight.X - _topLeft.X, _bottomRight.Y - _topLeft.Y);
         }
 
-        public Point GetTopLeft()
+        public Vector2 GetTopLeft()
         { 
             return _topLeft;
         }

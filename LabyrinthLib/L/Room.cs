@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,9 +20,9 @@ namespace LabyrinthLib.L
             visitor.VisitRoom(this);
         }
 
-        internal Point bottomRight()
+        internal Vector2 bottomRight()
         {
-            return new Point(X + W, Y + H);
+            return new Vector2(X + W, Y + H);
         }
 
     }
