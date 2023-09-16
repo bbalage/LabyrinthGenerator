@@ -8,12 +8,11 @@ namespace LabyrinthLib.L
 {
     public class Door : LObject
     {
-        public float Size { get; }
+        public static readonly int DoorSize = 2;
         public bool Horizontal { get; }
-        public Door(int x, int y, int size, bool horizontal) :
+        public Door(int x, int y, bool horizontal) :
             base(x, y)
         {
-            Size = size;
             Horizontal = horizontal;
         }
 

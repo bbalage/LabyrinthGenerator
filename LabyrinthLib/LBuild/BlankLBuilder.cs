@@ -7,24 +7,36 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.LBuild
 {
-    class BlankLBuilder : LBuilder
+    public class BlankLBuilder : LBuilder
     {
         private Labyrinth _labyrinth = new Labyrinth();
+        private RoomConnectingStrategy ?_roomConnectingStrategy;
 
-        public LBuilder addRoom(string roomName, int x, int y, int w, int h)
+        public LBuilder AddRoom(string roomName, int x, int y, int w, int h)
         {
-            
+            _labyrinth.addRoom(new Room(x, y, w, h), roomName);
             return this;
         }
 
-        public LBuilder connectRooms(string roomName1, string roomName2)
+        public LBuilder ConnectRooms(string roomName1, string roomName2)
         {
-            throw new NotImplementedException();
+            if (_roomConnectingStrategy == null)
+                throw new LabyrinthException("No room connecting strategy configured.");
+            _roomConnectingStrategy.ConnectRooms(_labyrinth, roomName1, roomName2);
+            return this;
         }
 
-        public Labyrinth build()
+        public LBuilder SetRoomConnectingStrategy(RoomConnectingStrategy roomConnectingStrategy)
         {
-            throw new NotImplementedException();
+            _roomConnectingStrategy = roomConnectingStrategy;
+            return this;
+        }
+
+        public Labyrinth Build()
+        {
+            var lab = _labyrinth;
+            _labyrinth = new Labyrinth();
+            return lab;
         }
     }
 }

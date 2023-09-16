@@ -1,5 +1,6 @@
 ﻿using LabyrinthLib.Drawer;
 using LabyrinthLib.L;
+using LabyrinthLib.LBuild;
 
 namespace ConsoleApp
 {
@@ -7,14 +8,17 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Labyrinth labyrinth = new Labyrinth();
-            labyrinth.addRoom(new Room(0, 0, 5, 5), "Room1");
-            labyrinth.addRoom(new Room(10, 0, 5, 10), "Room2");
-            labyrinth.addRoom(new Room(0, 10, 8, 3), "Room3");
-            labyrinth.addRoom(new Room(-10, -5, 8, 4), "Room4");
+            LBuilder builder = new BlankLBuilder();
+            Labyrinth lab = builder.SetRoomConnectingStrategy(new TouchingRoomConnectingStrategy())
+                .AddRoom("Room1", 0,0,5,5)
+                .AddRoom("Room2", 5,0,10,10)
+                .AddRoom("Room3", 0,-10,5,10)
+                .ConnectRooms("Room1", "Room2")
+                .ConnectRooms("Room1", "Room3")
+                .Build();
             LabyrinthDrawer drawer = new BitmapLDrawer();
             // LabyrinthDrawer drawer = new CharacterLDrawer();
-            drawer.Draw(labyrinth);
+            drawer.Draw(lab);
         }
     }
 }

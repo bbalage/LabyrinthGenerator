@@ -64,6 +64,11 @@ namespace LabyrinthLib.L
         {
             return _bottomRight;
         }
+
+        public Room GetRoom(string name)
+        {
+            return _rooms[_roomNameMap[name]];
+        }
         public void Accept(LabyrinthVisitor visitor)
         {
             visitor.VisitLabyrinth(this);

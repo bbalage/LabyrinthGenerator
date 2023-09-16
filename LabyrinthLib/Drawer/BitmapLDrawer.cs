@@ -30,13 +30,17 @@ namespace LabyrinthLib.Drawer
 
         public void VisitDoor(Door door)
         {
-            //var rect = new Rectangle(
-            //    (int)(_topLeft.X + door.X * pixelMultipliers.X),
-            //    (int)(_topLeft.Y + door.Y * pixelMultipliers.Y),
-            //    (int)(door.W * pixelMultipliers.X),
-            //    (int)(door.H * pixelMultipliers.Y));
-            //Pen pen = new SolidPen(Color.Green, 5);
-            //_img.Mutate(x => x.Draw(pen, rect));
+            var points = new PointF[]
+                {
+                    new PointF(
+                        door.X * pixelMultipliers.X - _topLeft.X,
+                        door.Y * pixelMultipliers.Y - _topLeft.Y),
+                    new PointF(
+                        (door.Horizontal ? door.X + Door.DoorSize : door.X) * pixelMultipliers.X - _topLeft.X,
+                        (door.Horizontal ? door.Y : door.Y + Door.DoorSize) * pixelMultipliers.Y - _topLeft.Y)
+                };
+            Pen pen = new SolidPen(Color.Green, 5);
+            _img.Mutate(x => x.DrawLine(pen, points));
         }
 
         public void VisitLabyrinth(Labyrinth labyrinth)
