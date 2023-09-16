@@ -1,11 +1,10 @@
-﻿using LabyrinthLib.L;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabyrinthLib.LVis
+namespace LabyrinthLib.L
 {
     public interface LabyrinthVisitor
     {

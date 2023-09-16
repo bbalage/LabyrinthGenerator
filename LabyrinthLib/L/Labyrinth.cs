@@ -1,5 +1,4 @@
-﻿using LabyrinthLib.LVis;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -58,11 +57,11 @@ namespace LabyrinthLib.L
         public void Accept(LabyrinthVisitor visitor)
         {
             visitor.VisitLabyrinth(this);
-            foreach(var room in _rooms)
+            foreach (var room in _rooms)
             {
                 room.Accept(visitor);
             }
-            foreach(var door in _doors)
+            foreach (var door in _doors)
             {
                 door.Accept(visitor);
             }
