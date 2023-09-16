@@ -9,10 +9,10 @@ namespace LabyrinthLib.L
 {
     public struct Size
     {
-        public float width;
-        public float height;
+        public int width;
+        public int height;
 
-        public Size(float width, float height)
+        public Size(int width, int height)
         {
             this.width = width;
             this.height = height;
@@ -23,18 +23,21 @@ namespace LabyrinthLib.L
     {
         private readonly List<Room> _rooms = new();
         private readonly List<Door> _doors = new();
-        private Vector2 _topLeft = new Vector2(0, 0);
-        private Vector2 _bottomRight = new Vector2(0, 0);
+        private Vec2 _topLeft = new Vec2(int.MaxValue, int.MaxValue);
+        private Vec2 _bottomRight = new Vec2(int.MinValue, int.MinValue);
+        private readonly Dictionary<string, int> _roomNameMap = new(); 
 
-        public int addRoom(Room room)
+        public int addRoom(Room room, string name)
         {
             var len = _rooms.Count;
+            _roomNameMap.Add(name, len);
             _rooms.Add(room);
             _topLeft.X = Math.Min(room.X, _topLeft.X);
             _topLeft.Y = Math.Min(room.Y, _topLeft.Y);
-            Vector2 bottomRight = room.bottomRight();
+            Vec2 bottomRight = room.bottomRight();
             _bottomRight.X = Math.Max(bottomRight.X, _bottomRight.X);
             _bottomRight.Y = Math.Max(bottomRight.Y, _bottomRight.Y);
+            
             return len;
         }
 
@@ -47,12 +50,19 @@ namespace LabyrinthLib.L
 
         public Size GetSize()
         {
+            if (_rooms.Count == 0)
+                return new Size(0, 0);
             return new Size(_bottomRight.X - _topLeft.X, _bottomRight.Y - _topLeft.Y);
         }
 
-        public Vector2 GetTopLeft()
+        public Vec2 GetTopLeft()
         { 
             return _topLeft;
+        }
+
+        public Vec2 GetBottomRight()
+        {
+            return _bottomRight;
         }
         public void Accept(LabyrinthVisitor visitor)
         {

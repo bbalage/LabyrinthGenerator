@@ -11,7 +11,7 @@ namespace LabyrinthLib.Drawer
     public class CharacterLDrawer : LabyrinthDrawer, LabyrinthVisitor
     {
         private int[,] _renderMap = new int[0,0];
-        Vector2 _topLeft;
+        Vec2 _topLeft;
 
         public void Draw(Labyrinth labyrinth)
         {
@@ -32,32 +32,28 @@ namespace LabyrinthLib.Drawer
 
         public void VisitRoom(Room room)
         {
-            int bottomRightX = (int)(room.bottomRight().X);
-            int bottomRightY = (int)(room.bottomRight().Y);
-            int roomX = (int)room.X;
-            int roomY = (int)room.Y;
-            int topLeftX = (int)_topLeft.X;
-            int topLeftY = (int)_topLeft.Y;
-            int row = (int)(room.Y - _topLeft.Y);
+            int bottomRightX = room.bottomRight().X;
+            int bottomRightY = room.bottomRight().Y;
+            int row = (room.Y - _topLeft.Y);
             int col;
-            for (col = roomX; col <= bottomRightX; ++col)
+            for (col = room.X - _topLeft.X; col < bottomRightX - _topLeft.X; ++col)
             {
-                _renderMap[row, col - topLeftX] = 1;
+                _renderMap[row, col] = 1;
             }
-            row = bottomRightY - topLeftY;
-            for (col = roomX; col <= bottomRightX; ++col)
+            row = bottomRightY - _topLeft.Y;
+            for (col = room.X - _topLeft.X; col < bottomRightX - _topLeft.X; ++col)
             {
-                _renderMap[row, col - topLeftX] = 1;
+                _renderMap[row, col] = 1;
             }
-            col = roomX - topLeftX;
-            for (row = roomY + 1; row <= bottomRightY - 1; ++row)
+            col = room.X - _topLeft.X;
+            for (row = room.Y - _topLeft.Y; row < bottomRightY - _topLeft.Y; ++row)
             {
-                _renderMap[row - topLeftY, col] = 1;
+                _renderMap[row, col] = 1;
             }
-            col = bottomRightX - topLeftX;
-            for (row = roomY + 1; row <= bottomRightY - 1; ++row)
+            col = bottomRightX - _topLeft.X;
+            for (row = room.Y - _topLeft.Y; row < bottomRightY - _topLeft.Y; ++row)
             {
-                _renderMap[row - topLeftY, col] = 1;
+                _renderMap[row, col] = 1;
             }
         }
 
@@ -66,7 +62,7 @@ namespace LabyrinthLib.Drawer
         public void VisitLabyrinth(Labyrinth labyrinth)
         {
             var size = labyrinth.GetSize();
-            _renderMap = new int[(int)(size.width) + 1, (int)(size.height) + 1];
+            _renderMap = new int[size.height + 1, size.width + 1];
             _topLeft = labyrinth.GetTopLeft();
         }
     }

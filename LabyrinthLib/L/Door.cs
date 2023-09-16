@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.L
 {
-    public class Door : LabyrinthObject
+    public class Door : LObject
     {
-        private int Room1 { get; }
-        private int Room2 { get; }
-
-        public Door(int x, int y, int w, int h, int room1, int room2) :
-            base(x, y, w, h)
+        public float Size { get; }
+        public bool Horizontal { get; }
+        public Door(int x, int y, int size, bool horizontal) :
+            base(x, y)
         {
-            Room1 = room1;
-            Room2 = room2;
+            Size = size;
+            Horizontal = horizontal;
         }
 
         public override void Accept(LabyrinthVisitor visitor)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.L
 {
-    public class Room : LabyrinthObject
+    public class Room : LTraversable
     {
         public Room(int x, int y, int w, int h) :
             base(x, y, w, h)
@@ -19,10 +19,9 @@ namespace LabyrinthLib.L
             visitor.VisitRoom(this);
         }
 
-        internal Vector2 bottomRight()
+        public override bool IsTraversable(int x, int y)
         {
-            return new Vector2(X + W, Y + H);
+            return x >= 0 && x <= W && y >= 0 && y <= H;
         }
-
     }
 }
