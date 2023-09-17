@@ -31,12 +31,12 @@ namespace LabyrinthLib.LBuild
             // - ...
             bool horizontal = start.X != end.X;
             int length = horizontal ? end.X - start.X : end.Y - start.Y;
-            if (length < Door.DoorSize)
+            if (length < LTraversable.DoorSize)
                 throw new LabyrinthException("Cannot connect rooms because overlap size is not sufficient.");
 
             Vec2 doorPose = new Vec2(
-                horizontal ? start.X + (length - Door.DoorSize) / 2 : start.X,
-                horizontal ? start.Y : start.Y + (length - Door.DoorSize) / 2);
+                horizontal ? start.X + (length - LTraversable.DoorSize) / 2 : start.X,
+                horizontal ? start.Y : start.Y + (length - LTraversable.DoorSize) / 2);
             labyrinth.addDoor(new Door(doorPose.X, doorPose.Y, horizontal));
         }
 
@@ -48,6 +48,11 @@ namespace LabyrinthLib.LBuild
         public void VisitDoor(Door door)
         {
             throw new LabyrinthException("Unexpected error. Door should not be considered in this connection strategy.");
+        }
+
+        public void VisitCorridor(Corridor corridor)
+        {
+            // TODO: Implement
         }
     }
 }

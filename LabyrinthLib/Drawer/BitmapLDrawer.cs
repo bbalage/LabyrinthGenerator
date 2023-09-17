@@ -44,8 +44,8 @@ namespace LabyrinthLib.Drawer
                         door.X * pixelMultipliers.X - _topLeft.X,
                         door.Y * pixelMultipliers.Y - _topLeft.Y),
                     new PointF(
-                        (door.Horizontal ? door.X + Door.DoorSize : door.X) * pixelMultipliers.X - _topLeft.X,
-                        (door.Horizontal ? door.Y : door.Y + Door.DoorSize) * pixelMultipliers.Y - _topLeft.Y)
+                        (door.Horizontal ? door.X + LTraversable.DoorSize : door.X) * pixelMultipliers.X - _topLeft.X,
+                        (door.Horizontal ? door.Y : door.Y + LTraversable.DoorSize) * pixelMultipliers.Y - _topLeft.Y)
                 };
             Pen pen = new SolidPen(Color.Green, 5);
             _img.Mutate(x => x.DrawLine(pen, points));
@@ -60,6 +60,10 @@ namespace LabyrinthLib.Drawer
                 room.H * pixelMultipliers.Y);
             Pen pen = new SolidPen(Color.Red, 5);
             _img.Mutate(x => x.Draw(pen, rect));
+        }
+
+        public void VisitCorridor(Corridor corridor)
+        {
         }
     }
 }

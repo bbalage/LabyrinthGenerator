@@ -19,9 +19,9 @@ namespace LabyrinthLib.L
             visitor.VisitRoom(this);
         }
 
-        public override bool IsTraversable(int x, int y)
+        public override bool IsTraversable(Vec2 p)
         {
-            return x >= 0 && x <= W && y >= 0 && y <= H;
+            return p.X >= 0 && p.X <= W && p.Y >= 0 && p.Y <= H;
         }
     }
 }

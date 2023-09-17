@@ -87,15 +87,19 @@ namespace LabyrinthLib.Drawer
             if (door.Horizontal)
             {
                 int row = door.Y - _topLeft.Y;
-                for (int col = door.X - _topLeft.X; col < door.X - _topLeft.X + Door.DoorSize; ++col)
+                for (int col = door.X - _topLeft.X; col < door.X - _topLeft.X + LTraversable.DoorSize; ++col)
                     _renderMap[row, col] = RenderMapFieldType.HORIZONTAL_DOOR;
             }
             else
             {
                 int col = door.X - _topLeft.X;
-                for (int row = door.Y - _topLeft.Y; row < door.Y - _topLeft.Y + Door.DoorSize; ++row)
+                for (int row = door.Y - _topLeft.Y; row < door.Y - _topLeft.Y + LTraversable.DoorSize; ++row)
                     _renderMap[row, col] = RenderMapFieldType.VERTICAL_DOOR;
             }
+        }
+
+        public void VisitCorridor(Corridor corridor)
+        { 
         }
     }
 }

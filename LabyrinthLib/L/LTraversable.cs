@@ -9,6 +9,8 @@ namespace LabyrinthLib.L
 {
     public abstract class LTraversable : LObject
     {
+        public static readonly int WallWidth = 1;
+        public static readonly int DoorSize = 3;
         public int W { get; }
         public int H { get; }
 
@@ -18,7 +20,7 @@ namespace LabyrinthLib.L
             H = h;
         }
 
-        public abstract bool IsTraversable(int x, int y);
+        public abstract bool IsTraversable(Vec2 p);
 
         public Vec2 bottomRight()
         {

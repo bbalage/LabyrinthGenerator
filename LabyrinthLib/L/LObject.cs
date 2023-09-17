@@ -16,6 +16,15 @@ namespace LabyrinthLib.L
             X = x;
             Y = y;
         }
+        public int AxisAlignedDistance(Vec2 v)
+        {
+            if (v.X == X)
+                return Math.Abs(v.Y - Y);
+            else if (v.Y == Y)
+                return Math.Abs(v.X - X);
+            else
+                return int.MaxValue;
+        }
 
         public static Vec2 operator +(Vec2 v1, Vec2 v2) => new Vec2(v1.X + v2.X, v1.Y + v2.Y);
         public static Vec2 operator -(Vec2 v1, Vec2 v2) => new Vec2(v1.X - v2.X, v1.Y - v2.Y);
