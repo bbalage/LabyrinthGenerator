@@ -16,7 +16,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace LabyrinthLib.Drawer
 {
-    public class BitmapLDrawer : LabyrinthDrawer, LabyrinthVisitor
+    public class BitmapLDrawer : LabyrinthDrawer, LVisitor
     {
         private Image<Rgb24> _img;
         private Vec2 _topLeft;
@@ -24,7 +24,15 @@ namespace LabyrinthLib.Drawer
 
         public void Draw(Labyrinth labyrinth)
         {
-            labyrinth.Accept(this);
+            var size = labyrinth.GetSize();
+            _img = new Image<Rgb24>(size.width * pixelMultipliers.X, size.height * pixelMultipliers.Y);
+            _topLeft = labyrinth.GetTopLeft() * pixelMultipliers;
+            LIterator lItertator = new AllLIterator(labyrinth);
+            while (lItertator.Next())
+            {
+                LObject lObject = lItertator.Get();
+                lObject.Accept(this);
+            }
             _img.Save("labyrinth.bmp");
         }
 
@@ -41,13 +49,6 @@ namespace LabyrinthLib.Drawer
                 };
             Pen pen = new SolidPen(Color.Green, 5);
             _img.Mutate(x => x.DrawLine(pen, points));
-        }
-
-        public void VisitLabyrinth(Labyrinth labyrinth)
-        {
-            var size = labyrinth.GetSize();
-            _img = new Image<Rgb24>(size.width * pixelMultipliers.X, size.height * pixelMultipliers.Y);
-            _topLeft = labyrinth.GetTopLeft() * pixelMultipliers;
         }
 
         public void VisitRoom(Room room)

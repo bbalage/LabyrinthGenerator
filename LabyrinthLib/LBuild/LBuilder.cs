@@ -10,9 +10,9 @@ namespace LabyrinthLib.LBuild
     public interface LBuilder
     {
         LBuilder AddRoom(string roomName, int x, int y, int w, int h);
-        LBuilder ConnectRooms(string roomName1, string roomName2);
+        LBuilder Connect(string roomName1, string roomName2);
 
-        LBuilder SetRoomConnectingStrategy(RoomConnectingStrategy roomConnectingStrategy);
+        LBuilder SetConnectingStrategy(ConnectingStrategy roomConnectingStrategy);
         Labyrinth Build();
     }
 }

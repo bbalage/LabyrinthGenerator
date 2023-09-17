@@ -35,6 +35,6 @@ namespace LabyrinthLib.L
             _pos.Y = y;
         }
 
-        public abstract void Accept(LabyrinthVisitor visitor);
+        public abstract void Accept(LVisitor visitor);
     }
 }

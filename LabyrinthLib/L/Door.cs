@@ -16,7 +16,7 @@ namespace LabyrinthLib.L
             Horizontal = horizontal;
         }
 
-        public override void Accept(LabyrinthVisitor visitor)
+        public override void Accept(LVisitor visitor)
         {
             visitor.VisitDoor(this);
         }

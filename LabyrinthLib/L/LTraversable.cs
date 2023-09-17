@@ -19,7 +19,7 @@ namespace LabyrinthLib.L
         }
 
         public abstract bool IsTraversable(int x, int y);
-        
+
         public Vec2 bottomRight()
         {
             return new Vec2(X + W, Y + H);

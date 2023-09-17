@@ -10,7 +10,7 @@ namespace LabyrinthLib.LBuild
     public class BlankLBuilder : LBuilder
     {
         private Labyrinth _labyrinth = new Labyrinth();
-        private RoomConnectingStrategy ?_roomConnectingStrategy;
+        private ConnectingStrategy ?_roomConnectingStrategy;
 
         public LBuilder AddRoom(string roomName, int x, int y, int w, int h)
         {
@@ -18,15 +18,15 @@ namespace LabyrinthLib.LBuild
             return this;
         }
 
-        public LBuilder ConnectRooms(string roomName1, string roomName2)
+        public LBuilder Connect(string roomName1, string roomName2)
         {
             if (_roomConnectingStrategy == null)
                 throw new LabyrinthException("No room connecting strategy configured.");
-            _roomConnectingStrategy.ConnectRooms(_labyrinth, roomName1, roomName2);
+            _roomConnectingStrategy.Connect(this, _labyrinth, roomName1, roomName2);
             return this;
         }
 
-        public LBuilder SetRoomConnectingStrategy(RoomConnectingStrategy roomConnectingStrategy)
+        public LBuilder SetConnectingStrategy(ConnectingStrategy roomConnectingStrategy)
         {
             _roomConnectingStrategy = roomConnectingStrategy;
             return this;

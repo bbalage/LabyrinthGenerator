@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.L
 {
-    public interface LabyrinthVisitor
+    public interface LVisitor
     {
-        void VisitLabyrinth(Labyrinth labyrinth);
         void VisitRoom(Room room);
         void VisitDoor(Door door);
     }

@@ -21,17 +21,20 @@ namespace LabyrinthLib.L
 
     public class Labyrinth
     {
-        private readonly List<Room> _rooms = new();
+        private readonly List<LTraversable> _traversables = new();
         private readonly List<Door> _doors = new();
         private Vec2 _topLeft = new Vec2(int.MaxValue, int.MaxValue);
         private Vec2 _bottomRight = new Vec2(int.MinValue, int.MinValue);
-        private readonly Dictionary<string, int> _roomNameMap = new(); 
+        private readonly Dictionary<string, int> _roomNameMap = new();
 
-        public int addRoom(Room room, string name)
+        public List<LTraversable> Rooms { get { return _traversables; } }
+        public List<Door> Doors { get { return _doors; } }
+
+        public int addRoom(LTraversable room, string name)
         {
-            var len = _rooms.Count;
+            var len = _traversables.Count;
             _roomNameMap.Add(name, len);
-            _rooms.Add(room);
+            _traversables.Add(room);
             _topLeft.X = Math.Min(room.X, _topLeft.X);
             _topLeft.Y = Math.Min(room.Y, _topLeft.Y);
             Vec2 bottomRight = room.bottomRight();
@@ -50,7 +53,7 @@ namespace LabyrinthLib.L
 
         public Size GetSize()
         {
-            if (_rooms.Count == 0)
+            if (_traversables.Count == 0)
                 return new Size(0, 0);
             return new Size(_bottomRight.X - _topLeft.X, _bottomRight.Y - _topLeft.Y);
         }
@@ -65,21 +68,9 @@ namespace LabyrinthLib.L
             return _bottomRight;
         }
 
-        public Room GetRoom(string name)
+        public LTraversable GetRoom(string name)
         {
-            return _rooms[_roomNameMap[name]];
-        }
-        public void Accept(LabyrinthVisitor visitor)
-        {
-            visitor.VisitLabyrinth(this);
-            foreach (var room in _rooms)
-            {
-                room.Accept(visitor);
-            }
-            foreach (var door in _doors)
-            {
-                door.Accept(visitor);
-            }
+            return _traversables[_roomNameMap[name]];
         }
     }
 }
