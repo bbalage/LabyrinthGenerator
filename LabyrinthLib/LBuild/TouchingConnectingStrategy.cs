@@ -23,7 +23,7 @@ namespace LabyrinthLib.LBuild
             Vec2 doorPose = new Vec2(
                 horizontal ? start.X + (length - LTraversable.DoorSize) / 2 : start.X,
                 horizontal ? start.Y : start.Y + (length - LTraversable.DoorSize) / 2);
-            builder.AddDoor(doorPose.X, doorPose.Y, horizontal, 0, 0);
+            builder.AddDoor(doorPose.X, doorPose.Y, horizontal, roomName1, roomName2);
         }
     }
 }

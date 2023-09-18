@@ -18,9 +18,9 @@ namespace LabyrinthLib.LBuild
             return this;
         }
 
-        public LBuilder AddDoor(int x, int y, bool horizontal, int room1, int room2)
+        public LBuilder AddDoor(int x, int y, bool horizontal, string roomName1, string roomName2)
         {
-            _labyrinth.AddDoor(new Door(x, y, horizontal), room1, room2);
+            _labyrinth.AddDoor(new Door(x, y, horizontal), roomName1, roomName2);
             return this;
         }
 

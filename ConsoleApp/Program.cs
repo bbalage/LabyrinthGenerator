@@ -20,8 +20,10 @@ namespace ConsoleApp
                 .AddRoom("Room1", 0, 0, 50, 50)
                 .AddRoom("Room2", 100, 0, 100, 100)
                 .AddRoom("Room3", 0, -200, 50, 100)
+                .AddRoom("Room4", 210, 25, 200, 50)
                 .Connect("Room1", "Room2")
                 .Connect("Room1", "Room3")
+                .Connect("Room2", "Room4")
                 .Build();
             LabyrinthDrawer drawer = new BitmapLDrawer();
             LabyrinthDrawer drawer2 = new CharacterLDrawer();

@@ -30,6 +30,7 @@ namespace LabyrinthLib.L
 
         public List<LTraversable> Rooms { get { return _traversables; } }
         public List<Door> Doors { get { return _doors; } }
+        public List<List<int>> ConnMatrix { get { return _connMatrix; } }
 
         public int AddRoom(LTraversable room, string name)
         {
@@ -41,13 +42,18 @@ namespace LabyrinthLib.L
             Vec2 bottomRight = room.BottomRight();
             _bottomRight.X = Math.Max(bottomRight.X, _bottomRight.X);
             _bottomRight.Y = Math.Max(bottomRight.Y, _bottomRight.Y);
-            
+            _connMatrix.Add(new List<int>());
+            foreach (var row in _connMatrix)
+                for (int i = row.Count; i <= len; ++i)
+                    row.Add(-1);
             return len;
         }
 
-        public int AddDoor(Door door, int room1, int room2)
+        public int AddDoor(Door door, string roomName1, string roomName2)
         {
             var len = _doors.Count;
+            _connMatrix[_roomNameMap[roomName1]][_roomNameMap[roomName2]] = len;
+            _connMatrix[_roomNameMap[roomName2]][_roomNameMap[roomName1]] = len;
             _doors.Add(door);
             return len;
         }
