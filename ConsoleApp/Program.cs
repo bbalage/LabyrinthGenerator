@@ -9,10 +9,17 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             LBuilder builder = new BlankLBuilder();
-            Labyrinth lab = builder.SetConnectingStrategy(new TouchingConnectingStrategy())
-                .AddRoom("Room1", 0,0,5,5)
-                .AddRoom("Room2", 5,0,10,10)
-                .AddRoom("Room3", 0,-10,5,10)
+            //Labyrinth lab = builder.PushConnectingStrategy(new TouchingConnectingStrategy())
+            //    .AddRoom("Room1", 0,0,5,5)
+            //    .AddRoom("Room2", 5,0,10,10)
+            //    .AddRoom("Room3", 0,-10,5,10)
+            //    .Connect("Room1", "Room2")
+            //    .Connect("Room1", "Room3")
+            //    .Build();
+            Labyrinth lab = builder.PushConnectingStrategy(new StraightCorridorConnectingStrategy())
+                .AddRoom("Room1", 0, 0, 50, 50)
+                .AddRoom("Room2", 100, 0, 100, 100)
+                .AddRoom("Room3", 0, -200, 50, 100)
                 .Connect("Room1", "Room2")
                 .Connect("Room1", "Room3")
                 .Build();

@@ -61,9 +61,5 @@ namespace LabyrinthLib.Drawer
             Pen pen = new SolidPen(Color.Red, 5);
             _img.Mutate(x => x.Draw(pen, rect));
         }
-
-        public void VisitCorridor(Corridor corridor)
-        {
-        }
     }
 }

@@ -11,8 +11,8 @@ namespace LabyrinthLib.LBuild
     {
         LBuilder AddRoom(string roomName, int x, int y, int w, int h);
         LBuilder Connect(string roomName1, string roomName2);
-
-        LBuilder SetConnectingStrategy(ConnectingStrategy roomConnectingStrategy);
+        LBuilder PushConnectingStrategy(ConnectingStrategy roomConnectingStrategy);
+        LBuilder PopConnectingStrategy();
         Labyrinth Build();
     }
 }

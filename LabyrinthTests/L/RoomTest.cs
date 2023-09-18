@@ -15,7 +15,7 @@ namespace LabyrinthTests.L
             Room room = new Room(10, 10, 10, 10);
             Vec2 expectedBottomRight = new Vec2(20, 20);
                 
-            Vec2 actualBottomRight = room.bottomRight();
+            Vec2 actualBottomRight = room.BottomRight();
 
             Assert.AreEqual(expectedBottomRight, actualBottomRight);
         }

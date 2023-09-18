@@ -37,7 +37,7 @@ namespace LabyrinthLib.L
             _traversables.Add(room);
             _topLeft.X = Math.Min(room.X, _topLeft.X);
             _topLeft.Y = Math.Min(room.Y, _topLeft.Y);
-            Vec2 bottomRight = room.bottomRight();
+            Vec2 bottomRight = room.BottomRight();
             _bottomRight.X = Math.Max(bottomRight.X, _bottomRight.X);
             _bottomRight.Y = Math.Max(bottomRight.Y, _bottomRight.Y);
             

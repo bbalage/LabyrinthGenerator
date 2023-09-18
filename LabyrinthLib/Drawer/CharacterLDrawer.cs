@@ -57,8 +57,8 @@ namespace LabyrinthLib.Drawer
 
         public void VisitRoom(Room room)
         {
-            int bottomRightX = room.bottomRight().X;
-            int bottomRightY = room.bottomRight().Y;
+            int bottomRightX = room.BottomRight().X;
+            int bottomRightY = room.BottomRight().Y;
             int row = (room.Y - _topLeft.Y);
             int col;
             for (col = room.X - _topLeft.X; col < bottomRightX - _topLeft.X; ++col)
@@ -96,10 +96,6 @@ namespace LabyrinthLib.Drawer
                 for (int row = door.Y - _topLeft.Y; row < door.Y - _topLeft.Y + LTraversable.DoorSize; ++row)
                     _renderMap[row, col] = RenderMapFieldType.VERTICAL_DOOR;
             }
-        }
-
-        public void VisitCorridor(Corridor corridor)
-        { 
         }
     }
 }

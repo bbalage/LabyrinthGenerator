@@ -49,10 +49,5 @@ namespace LabyrinthLib.LBuild
         {
             throw new LabyrinthException("Unexpected error. Door should not be considered in this connection strategy.");
         }
-
-        public void VisitCorridor(Corridor corridor)
-        {
-            // TODO: Implement
-        }
     }
 }

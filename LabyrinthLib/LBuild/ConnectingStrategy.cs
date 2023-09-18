@@ -26,8 +26,8 @@ namespace LabyrinthLib.LBuild
 
         protected (Vec2, Vec2) CalcTouchLine(Room room1, Room room2)
         {
-            Vec2 mbr = room1.bottomRight();
-            Vec2 obr = room2.bottomRight();
+            Vec2 mbr = room1.BottomRight();
+            Vec2 obr = room2.BottomRight();
             Vec2 start, end;
             if (mbr.X == room2.X)
             {

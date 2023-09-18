@@ -10,6 +10,5 @@ namespace LabyrinthLib.L
     {
         void VisitRoom(Room room);
         void VisitDoor(Door door);
-        void VisitCorridor(Corridor corridor);
     }
 }
