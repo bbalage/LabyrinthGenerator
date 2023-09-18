@@ -8,20 +8,13 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            //LBuilder builder = new BlankLBuilder();
+            // LBuilder builder = new BlankLBuilder();
             Dictionary<RoomType, (Color, Color)> colorDict = new();
             colorDict.Add(RoomType.BLANK, (new Color { R = 255, G = 255, B = 255 }, new Color { R = 255, G = 255, B = 255 }));
             colorDict.Add(RoomType.FACTORY, (new Color { R = 122, G = 122, B = 122 }, new Color { R = 150, G = 150, B = 150 }));
             colorDict.Add(RoomType.SAWMILL, (new Color { R = 255, G = 100, B = 100 }, new Color { R = 255, G = 150, B = 150 }));
             colorDict.Add(RoomType.HOSPITAL, (new Color { R = 255, G = 255, B = 255 }, new Color { R = 255, G = 255, B = 255 }));
             LBuilder builder = new ColoredLBuilder(colorDict);
-            //Labyrinth lab = builder.PushConnectingStrategy(new TouchingConnectingStrategy())
-            //    .AddRoom("Room1", 0,0,5,5)
-            //    .AddRoom("Room2", 5,0,10,10)
-            //    .AddRoom("Room3", 0,-10,5,10)
-            //    .Connect("Room1", "Room2")
-            //    .Connect("Room1", "Room3")
-            //    .Build();
             Labyrinth lab = builder.PushConnectingStrategy(new StraightCorridorConnectingStrategy())
                 .AddRoom("Room1", 0, 0, 50, 50, RoomType.FACTORY)
                 .AddRoom("Room2", 100, 0, 100, 100, RoomType.SAWMILL)
@@ -34,8 +27,10 @@ namespace ConsoleApp
                 .Connect("Room3", "Room5")
                 .Connect("Room2", "Room5")
                 .Build();
-            LabyrinthDrawer drawer = new BitmapLDrawer();
-            // LabyrinthDrawer drawer2 = new CharacterLDrawer();
+            //LIterator iterator = new AllLIterator(lab);
+            LIterator iterator = new NeighborLIterator(lab, new Vec2 { X = 50, Y = 50});
+            LabyrinthDrawer drawer = new BitmapLDrawer(iterator);
+            // LabyrinthDrawer drawer2 = new CharacterLDrawer(iterator);
             drawer.Draw(lab);
             // drawer2.Draw(lab);
         }

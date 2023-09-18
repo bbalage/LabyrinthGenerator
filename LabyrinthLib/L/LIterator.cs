@@ -8,6 +8,7 @@ namespace LabyrinthLib.L
 {
     public interface LIterator
     {
+        void Start();
         bool Next();
         LObject Get();
     }

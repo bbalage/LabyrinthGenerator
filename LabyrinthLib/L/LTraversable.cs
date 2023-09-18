@@ -32,7 +32,7 @@ namespace LabyrinthLib.L
         public abstract (Vec2, Vec2, bool) CalcDistantTouchLine(LTraversable other);
 
 
-        public abstract bool IsTraversable(Vec2 p);
+        public abstract bool IsIn(Vec2 p);
 
         public Vec2 BottomRight()
         {

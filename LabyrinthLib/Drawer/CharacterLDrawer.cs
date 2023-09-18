@@ -16,18 +16,23 @@ namespace LabyrinthLib.Drawer
     {
         private RenderMapFieldType[,] _renderMap = new RenderMapFieldType[0,0];
         Vec2 _topLeft;
-        
+        LIterator _lItertator;
+
+        public CharacterLDrawer(LIterator lItertator)
+        {
+            _lItertator = lItertator;
+        }
 
         public void Draw(Labyrinth labyrinth)
         {
             var size = labyrinth.GetSize();
             _renderMap = new RenderMapFieldType[size.height + 1, size.width + 1];
             _topLeft = labyrinth.GetTopLeft();
-            
-            LIterator lItertator = new AllLIterator(labyrinth);
-            while (lItertator.Next())
+
+            _lItertator.Start();
+            while (_lItertator.Next())
             {
-                LObject lObject = lItertator.Get();
+                LObject lObject = _lItertator.Get();
                 lObject.Accept(this);
             }
 

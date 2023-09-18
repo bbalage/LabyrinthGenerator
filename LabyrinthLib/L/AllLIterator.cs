@@ -15,6 +15,13 @@ namespace LabyrinthLib.L
         { 
             _labyrinth = labyrinth;
         }
+
+        public void Start()
+        {
+            _index = -1;
+            _listI = 0;
+        }
+
         public LObject Get()
         {
             if (_listI == 0)

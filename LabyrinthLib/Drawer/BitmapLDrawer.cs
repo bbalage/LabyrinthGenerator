@@ -21,16 +21,23 @@ namespace LabyrinthLib.Drawer
         private Image<Rgb24> _img;
         private Vec2 _topLeft;
         private readonly Vec2 pixelMultipliers = new Vec2(10, 10);
+        private LIterator _lIterator;
+
+        public BitmapLDrawer(LIterator lIterator)
+        {
+            _lIterator = lIterator;
+        }
 
         public void Draw(Labyrinth labyrinth)
         {
             var size = labyrinth.GetSize();
             _img = new Image<Rgb24>(size.width * pixelMultipliers.X, size.height * pixelMultipliers.Y);
             _topLeft = labyrinth.GetTopLeft() * pixelMultipliers;
-            LIterator lItertator = new AllLIterator(labyrinth);
-            while (lItertator.Next())
+
+            _lIterator.Start();
+            while (_lIterator.Next())
             {
-                LObject lObject = lItertator.Get();
+                LObject lObject = _lIterator.Get();
                 lObject.Accept(this);
             }
             _img.Save("labyrinth.bmp");
