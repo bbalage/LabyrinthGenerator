@@ -21,14 +21,17 @@ namespace ConsoleApp
                 .AddRoom("Room2", 100, 0, 100, 100)
                 .AddRoom("Room3", 0, -200, 50, 100)
                 .AddRoom("Room4", 210, 25, 200, 50)
+                .AddRoom("Room5", 100, -150, 100, 50)
                 .Connect("Room1", "Room2")
                 .Connect("Room1", "Room3")
                 .Connect("Room2", "Room4")
+                .Connect("Room3", "Room5")
+                .Connect("Room2", "Room5")
                 .Build();
             LabyrinthDrawer drawer = new BitmapLDrawer();
-            LabyrinthDrawer drawer2 = new CharacterLDrawer();
+            // LabyrinthDrawer drawer2 = new CharacterLDrawer();
             drawer.Draw(lab);
-            drawer2.Draw(lab);
+            // drawer2.Draw(lab);
         }
     }
 }

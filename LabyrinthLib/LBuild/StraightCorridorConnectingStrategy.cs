@@ -36,7 +36,6 @@ namespace LabyrinthLib.LBuild
             int corrW = horizontal ? LTraversable.DoorSize + LTraversable.WallWidth * 4 : bottomRight.X - topLeft.X;
             int corrH = !horizontal ? LTraversable.DoorSize + LTraversable.WallWidth * 4 : bottomRight.Y - topLeft.Y;
 
-            // builder.AddRoom(corrName, topLeft.X, topLeft.Y, bottomRight.X - topLeft.X, bottomRight.Y - topLeft.Y);
             builder.AddRoom(corrName, corrX, corrY, corrW, corrH);
 
             builder.PushConnectingStrategy(new TouchingConnectingStrategy());
