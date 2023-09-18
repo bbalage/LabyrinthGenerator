@@ -14,7 +14,13 @@ namespace LabyrinthLib.LBuild
 
         public LBuilder AddRoom(string roomName, int x, int y, int w, int h)
         {
-            _labyrinth.addRoom(new Room(x, y, w, h), roomName);
+            _labyrinth.AddRoom(new Room(x, y, w, h), roomName);
+            return this;
+        }
+
+        public LBuilder AddDoor(int x, int y, bool horizontal, int room1, int room2)
+        {
+            _labyrinth.AddDoor(new Door(x, y, horizontal), room1, room2);
             return this;
         }
 

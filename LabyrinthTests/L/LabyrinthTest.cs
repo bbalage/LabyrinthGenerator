@@ -14,7 +14,7 @@ namespace LabyrinthTests.L
         {
             Room room = new Room(10, 10, 10, 10);
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(room, "Room");
+            lab.AddRoom(room, "Room");
             Vec2 expectedTopLeft = new Vec2(10, 10);
 
             Vec2 actualTopLeft = lab.GetTopLeft();
@@ -28,7 +28,7 @@ namespace LabyrinthTests.L
         {
             Room room = new Room(-10, -15, 10, 10);
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(room, "Room");
+            lab.AddRoom(room, "Room");
             Vec2 expectedTopLeft = new Vec2(-10, -15);
 
             Vec2 actualTopLeft = lab.GetTopLeft();
@@ -42,7 +42,7 @@ namespace LabyrinthTests.L
         {
             Room room = new Room(-10, -15, 15, 10);
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(room, "Room");
+            lab.AddRoom(room, "Room");
             Vec2 expectedBottomRight = new Vec2(5, -5);
 
             Vec2 actualBottomRight = lab.GetBottomRight();
@@ -56,7 +56,7 @@ namespace LabyrinthTests.L
         {
             Room room = new Room(-10, -15, 15, 10);
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(room, "Room");
+            lab.AddRoom(room, "Room");
             Size expectedSize = new Size(15, 10);
 
             Size actualSize = lab.GetSize();
@@ -72,9 +72,9 @@ namespace LabyrinthTests.L
             Room room2 = new Room(0, 5, 10, 15);
             Room room3 = new Room(-20, 5, 10, 15);
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(room1, "Room1");
-            lab.addRoom(room2, "Room2");
-            lab.addRoom(room3, "Room3");
+            lab.AddRoom(room1, "Room1");
+            lab.AddRoom(room2, "Room2");
+            lab.AddRoom(room3, "Room3");
             Size expectedSize = new Size(30, 35);
 
             Size actualSize = lab.GetSize();
@@ -88,10 +88,10 @@ namespace LabyrinthTests.L
         {
             
             Labyrinth lab = new Labyrinth();
-            lab.addRoom(new Room(0, 0, 5, 5), "Room1");
-            lab.addRoom(new Room(10, 0, 5, 10), "Room2");
-            lab.addRoom(new Room(0, 10, 8, 3), "Room3");
-            lab.addRoom(new Room(-10, -5, 8, 4), "Room4");
+            lab.AddRoom(new Room(0, 0, 5, 5), "Room1");
+            lab.AddRoom(new Room(10, 0, 5, 10), "Room2");
+            lab.AddRoom(new Room(0, 10, 8, 3), "Room3");
+            lab.AddRoom(new Room(-10, -5, 8, 4), "Room4");
             Size expectedSize = new Size(25, 18);
 
             Size actualSize = lab.GetSize();

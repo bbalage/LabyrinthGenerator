@@ -7,28 +7,14 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.LBuild
 {
-    public class TouchingConnectingStrategy : ConnectingStrategy, LVisitor
+    public class TouchingConnectingStrategy : ConnectingStrategy
     {
-        
-        // private List<Room> _corridors;
-        // private Corridor? _corridor;
-
-        public override void Connect(LBuilder builder, Labyrinth labyrinth, string roomName1, string roomName2)
+        public void Connect(LBuilder builder, Labyrinth labyrinth, string roomName1, string roomName2)
         {
-            EmptyLists();
             LTraversable room1 = labyrinth.GetRoom(roomName1);
             LTraversable room2 = labyrinth.GetRoom(roomName2);
-            room1.Accept(this);
-            room2.Accept(this);
 
-            var (start, end) = CalcTouchLine();
-            // CalcTouchLine
-            // - Room-Room
-            // - Room-Corridor
-            // - Corridor-Corridor
-            // - NonRectRoom-Room
-            // - NonRectRoom-Corridor
-            // - ...
+            var (start, end) = room1.CalcTouchLine(room2);
             bool horizontal = start.X != end.X;
             int length = horizontal ? end.X - start.X : end.Y - start.Y;
             if (length < LTraversable.DoorSize)
@@ -37,17 +23,7 @@ namespace LabyrinthLib.LBuild
             Vec2 doorPose = new Vec2(
                 horizontal ? start.X + (length - LTraversable.DoorSize) / 2 : start.X,
                 horizontal ? start.Y : start.Y + (length - LTraversable.DoorSize) / 2);
-            labyrinth.addDoor(new Door(doorPose.X, doorPose.Y, horizontal));
-        }
-
-        public void VisitRoom(Room room)
-        {
-            _rooms.Add(room);
-        }
-
-        public void VisitDoor(Door door)
-        {
-            throw new LabyrinthException("Unexpected error. Door should not be considered in this connection strategy.");
+            builder.AddDoor(doorPose.X, doorPose.Y, horizontal, 0, 0);
         }
     }
 }

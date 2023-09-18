@@ -26,11 +26,12 @@ namespace LabyrinthLib.L
         private Vec2 _topLeft = new Vec2(int.MaxValue, int.MaxValue);
         private Vec2 _bottomRight = new Vec2(int.MinValue, int.MinValue);
         private readonly Dictionary<string, int> _roomNameMap = new();
+        private readonly List<List<int>> _connMatrix = new();
 
         public List<LTraversable> Rooms { get { return _traversables; } }
         public List<Door> Doors { get { return _doors; } }
 
-        public int addRoom(LTraversable room, string name)
+        public int AddRoom(LTraversable room, string name)
         {
             var len = _traversables.Count;
             _roomNameMap.Add(name, len);
@@ -44,7 +45,7 @@ namespace LabyrinthLib.L
             return len;
         }
 
-        public int addDoor(Door door)
+        public int AddDoor(Door door, int room1, int room2)
         {
             var len = _doors.Count;
             _doors.Add(door);
