@@ -7,14 +7,27 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.LBuild
 {
-    public class BlankLBuilder : LBuilder
+    public class ColoredLBuilder : LBuilder
     {
         private Labyrinth _labyrinth = new Labyrinth();
         private readonly Stack<ConnectingStrategy> _roomConnectingStrategies = new();
+        private readonly Dictionary<RoomType, (L.Color, L.Color)> _colorDict;
 
+        public ColoredLBuilder(Dictionary<RoomType, (L.Color, L.Color)> colorDict)
+        {
+            _colorDict = colorDict;
+        }
         public LBuilder AddRoom(string roomName, int x, int y, int w, int h, RoomType type)
         {
-            _labyrinth.AddRoom(new Room(x, y, w, h, type), roomName);
+            var (color1, color2) = _colorDict[type];
+            Random random = new Random();
+            L.Color color = new()
+            {
+                R = (byte)random.Next(color1.R, color2.R),
+                B = (byte)random.Next(color1.G, color2.G),
+                G = (byte)random.Next(color1.B, color2.B)
+            };
+            _labyrinth.AddRoom(new ColoredRoom(x, y, w, h, type, color), roomName);
             return this;
         }
 

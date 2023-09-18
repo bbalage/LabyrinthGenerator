@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.LBuild
 {
-    public class StraightCorridorConnectingStrategy : ConnectingStrategy, LVisitor
+    public class StraightCorridorConnectingStrategy : ConnectingStrategy
     {
         public void Connect(LBuilder builder, Labyrinth labyrinth, string roomName1, string roomName2)
         {
@@ -26,7 +26,8 @@ namespace LabyrinthLib.LBuild
             {
                 builder.AddDoor(topLeft.X, topLeft.Y, false, roomName1, roomName2);
                 return;
-            } else if (bottomRight.Y - topLeft.Y == 0)
+            }
+            else if (bottomRight.Y - topLeft.Y == 0)
             {
                 builder.AddDoor(topLeft.X, topLeft.Y, true, roomName1, roomName2);
                 return;
@@ -36,22 +37,12 @@ namespace LabyrinthLib.LBuild
             int corrW = horizontal ? LTraversable.DoorSize + LTraversable.WallWidth * 4 : bottomRight.X - topLeft.X;
             int corrH = !horizontal ? LTraversable.DoorSize + LTraversable.WallWidth * 4 : bottomRight.Y - topLeft.Y;
 
-            builder.AddRoom(corrName, corrX, corrY, corrW, corrH);
+            builder.AddRoom(corrName, corrX, corrY, corrW, corrH, (room1 as Room)?.Type ?? RoomType.BLANK);
 
             builder.PushConnectingStrategy(new TouchingConnectingStrategy());
             builder.Connect(roomName1, corrName);
             builder.Connect(corrName, roomName2);
             builder.PopConnectingStrategy();
-        }
-
-        public void VisitRoom(Room room)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitDoor(Door door)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace LabyrinthLib.LBuild
 {
     public interface LBuilder
     {
-        LBuilder AddRoom(string roomName, int x, int y, int w, int h);
+        LBuilder AddRoom(string roomName, int x, int y, int w, int h, RoomType type);
 
         LBuilder AddDoor(int x, int y, bool horizontal, string roomName1, string roomName2);
         LBuilder Connect(string roomName1, string roomName2);

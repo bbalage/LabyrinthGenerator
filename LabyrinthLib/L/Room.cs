@@ -7,12 +7,19 @@ using System.Threading.Tasks;
 
 namespace LabyrinthLib.L
 {
+    public enum RoomType
+    {
+        BLANK, FACTORY, HOSPITAL, SAWMILL
+    }
     public class Room : LTraversable
     {
-        public Room(int x, int y, int w, int h) :
+        public RoomType Type { get; set; }
+        public Room(int x, int y, int w, int h, RoomType type) :
             base(x, y, w, h)
         {
+            Type = type;
         }
+
 
         public override (Vec2, Vec2) CalcTouchLine(LTraversable other)
         {

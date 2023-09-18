@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SixLabors.ImageSharp;
+using SL = SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -47,7 +47,7 @@ namespace LabyrinthLib.Drawer
                         (door.Horizontal ? door.X + LTraversable.DoorSize : door.X) * pixelMultipliers.X - _topLeft.X,
                         (door.Horizontal ? door.Y : door.Y + LTraversable.DoorSize) * pixelMultipliers.Y - _topLeft.Y)
                 };
-            Pen pen = new SolidPen(Color.Green, 5);
+            Pen pen = new SolidPen(SL.Color.Green, 5);
             _img.Mutate(x => x.DrawLine(pen, points));
         }
 
@@ -58,8 +58,21 @@ namespace LabyrinthLib.Drawer
                 room.Y * pixelMultipliers.Y - _topLeft.Y,
                 room.W * pixelMultipliers.X,
                 room.H * pixelMultipliers.Y);
-            Pen pen = new SolidPen(Color.Red, 5);
+            Pen pen = new SolidPen(SL.Color.Red, 5);
             _img.Mutate(x => x.Draw(pen, rect));
+        }
+
+        public void VisitColoredRoom(ColoredRoom room)
+        {
+            var rect = new Rectangle(
+                room.X * pixelMultipliers.X - _topLeft.X,
+                room.Y * pixelMultipliers.Y - _topLeft.Y,
+                room.W * pixelMultipliers.X,
+                room.H * pixelMultipliers.Y);
+            SL.Color color = new SL.Color(new Rgb24(room.Color.R, room.Color.G, room.Color.B));
+            Brush brushFill = new SolidBrush(color);
+            Pen penWall = new SolidPen(SL.Color.Red, 5);
+            _img.Mutate(x => x.Fill(brushFill, rect).Draw(penWall, rect));
         }
     }
 }

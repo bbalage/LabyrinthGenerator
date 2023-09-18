@@ -9,6 +9,7 @@ namespace LabyrinthLib.L
     public interface LVisitor
     {
         void VisitRoom(Room room);
+        void VisitColoredRoom(ColoredRoom room);
         void VisitDoor(Door door);
     }
 }

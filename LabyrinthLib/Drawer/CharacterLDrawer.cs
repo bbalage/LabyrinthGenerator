@@ -82,6 +82,11 @@ namespace LabyrinthLib.Drawer
             }
         }
 
+        public void VisitColoredRoom(ColoredRoom room)
+        {
+            VisitRoom(room);
+        }
+
         public void VisitDoor(Door door)
         {
             if (door.Horizontal)
